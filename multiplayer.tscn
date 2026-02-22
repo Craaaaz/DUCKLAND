@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dgxrtd6aajrpy"]
+
+[ext_resource type="Script" uid="uid://31h1506478bt" path="res://multiplayer.gd" id="1_o4y1c"]
+
+[node name="Multiplayer" type="Control" unique_id=1144369563]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o4y1c")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1844204826]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.119423114, 0.51238996, 0.83530474, 1)
