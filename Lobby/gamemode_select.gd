@@ -1,4 +1,4 @@
-extends Control
+extends Control				#模式選擇
 
 func _ready():
 	_create_buttons()
@@ -36,11 +36,16 @@ func _create_multiplayer_button():
 		add_child(button)
 
 func _on_singleplayer_button_pressed():
-	var scene = preload("res://singleplayer.tscn").instantiate()
+	# ---------------------------------------------------------
+	# 【主遊戲呼叫位置 - 單人遊戲】
+	# 這裡載入了單人遊戲場景，後續如果要串接主遊戲，請將 "res://Lobby/singleplayer.tscn"
+	# 替換為你的主遊戲場景 (例如 "res://MainGame.tscn")
+	# ---------------------------------------------------------
+	var scene = preload("res://Lobby/singleplayer.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	queue_free()
 
 func _on_multiplayer_button_pressed():
-	var scene = preload("res://multiplayer.tscn").instantiate()
+	var scene = preload("res://Lobby/multiplayer.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	queue_free()

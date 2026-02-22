@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjysqxtepser2"]
 
-[ext_resource type="GDScript" path="res://loginlobby.gd" id="1"]
+[ext_resource type="GDScript" path="res://Lobby/loginlobby.gd" id="1"]
 
 [node name="loginlobby" type="Control"]
 layout_mode = 3

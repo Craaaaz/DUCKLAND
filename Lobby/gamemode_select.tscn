@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://beguvetsig3el"]
 
-[ext_resource type="Script" uid="uid://c48c8b73guswt" path="res://gamemode_select.gd" id="1"]
+[ext_resource type="Script" uid="uid://c48c8b73guswt" path="res://Lobby/gamemode_select.gd" id="1"]
 
 [node name="GameModeSelect" type="Control" unique_id=1280577923]
 layout_mode = 3

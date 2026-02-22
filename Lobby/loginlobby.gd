@@ -1,4 +1,4 @@
-extends Control
+extends Control				#連線主畫面
 
 var player_name = ""
 var name_input = null
@@ -70,6 +70,6 @@ func _on_start_button_pressed():
 		print("我的名稱已設定")
 	
 	# 轉到遊戲模式選擇
-	var scene = preload("res://gamemode_select.tscn").instantiate()
+	var scene = preload("res://Lobby/gamemode_select.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	queue_free()

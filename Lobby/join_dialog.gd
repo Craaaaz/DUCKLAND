@@ -74,7 +74,7 @@ func _on_connection_success():
 	print("連接成功！轉到大廳...")
 	
 	# 轉到大廳場景
-	var scene = preload("res://waitingroom.tscn").instantiate()
+	var scene = preload("res://Lobby/waitingroom.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	
 	# 關閉當前場景

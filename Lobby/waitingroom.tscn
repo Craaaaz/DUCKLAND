@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cmv7g1f8b5v6r"]
 
-[ext_resource type="Script" uid="uid://dmeraee1fqr44" path="res://waitingroom.gd" id="1"]
+[ext_resource type="Script" uid="uid://dmeraee1fqr44" path="res://Lobby/waitingroom.gd" id="1"]
 
 [node name="waitingroom" type="Control" unique_id=1305923268]
 layout_mode = 3

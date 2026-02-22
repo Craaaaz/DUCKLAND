@@ -11,9 +11,7 @@ var notification_timer = null
 func _ready():
 	# 使用自動載入的網路管理器
 	network_manager = get_node("/root/NetworkManager")
-	if not network_manager:
-		print("錯誤: 找不到自動載入的 NetworkManager")
-		return
+	
 		
 	print("=== 等待房間初始化 ===")
 	print("找到網路管理器，is_host = ", network_manager.is_host)
@@ -187,8 +185,12 @@ func _update_player_count():
 func _on_start_button_pressed():
 	if network_manager.is_host and network_manager.get_player_count() >= 2:
 		print("開始遊戲...")
+		# ---------------------------------------------------------
+		# 【主遊戲呼叫位置 - 多人遊戲】
 		# 這裡應該實現開始遊戲的邏輯
-		# 例如：載入遊戲場景、同步所有玩家等
+		# 例如：載入遊戲場景 (如 res://MainGame.tscn)、同步所有玩家等
+		# 您可以在此處加入 RPC 呼叫來通知所有客戶端載入場景
+		# ---------------------------------------------------------
 		
 		# 暫時顯示訊息
 		status_label.text = "狀態: 正在開始遊戲..."
@@ -205,6 +207,6 @@ func _input(event):
 		# 重置網路管理器
 		network_manager.reset_state()
 		# 返回主選單
-		var scene = preload("res://loginlobby.tscn").instantiate()
+		var scene = preload("res://Lobby/loginlobby.tscn").instantiate()
 		get_tree().root.add_child(scene)
 		queue_free()

@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="DUCKLAND"
-run/main_scene="res://loginlobby.tscn"
+run/main_scene="res://Lobby/loginlobby.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-NetworkManager="*res://network_manager.gd"
+NetworkManager="*res://Lobby/network_manager.gd"
 
 [physics]
 

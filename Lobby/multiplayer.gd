@@ -1,4 +1,4 @@
-extends Control
+extends Control				#多人連線
 
 var network_manager
 var setup_btn: Button
@@ -68,7 +68,7 @@ func _on_setup_button_pressed():
 			join_btn.disabled = false
 
 func _on_join_button_pressed():
-	var dialog = preload("res://join_dialog.tscn").instantiate()
+	var dialog = preload("res://Lobby/join_dialog.tscn").instantiate()
 	add_child(dialog)
 	dialog.popup_centered()
 
@@ -76,7 +76,7 @@ func _on_connection_success():
 	print("連接成功！轉到大廳...")
 	
 	# 轉到大廳場景
-	var scene = preload("res://waitingroom.tscn").instantiate()
+	var scene = preload("res://Lobby/waitingroom.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	queue_free()
 
