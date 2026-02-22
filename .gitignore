@@ -1,11 +1,15 @@
+### Godot ###
 # Godot 4+ specific ignores
 .godot/
-.nomedia
+*.tmp
+
+# 排除所有 .gd.uid 檔案
+*.gd.uid
 
 # Godot-specific ignores
 .import/
 export.cfg
-export_credentials.cfg
+export_presets.cfg
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -14,3 +18,8 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# 排除特定的編輯器或代理設定檔
+AGENTS.md
+
+# End of https://www.toptal.com/developers/gitignore/api/godot
