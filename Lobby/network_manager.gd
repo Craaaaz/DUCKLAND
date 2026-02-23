@@ -139,22 +139,22 @@ func get_player_name(player_id):
 	# 如果還沒有名稱，使用預設
 	return "玩家" + str(player_id)
 
-func set_my_player_name(name):
+func set_my_player_name(new_name):
 	# 設定當前玩家的名字
-	print("設定我的玩家名稱: ", name)
-	my_player_name = name
+	print("設定我的玩家名稱: ", new_name)
+	my_player_name = new_name
 	# 如果已經有自己的ID，也更新到player_names中
 	var my_id = multiplayer.get_unique_id()
 	if my_id != 0:  # 如果有ID（已經連接）
-		player_names[my_id] = name
+		player_names[my_id] = new_name
 		# 同步給其他玩家
-		sync_player_name.rpc(my_id, name)
+		sync_player_name.rpc(my_id, new_name)
 
-func set_player_name(player_id, name):
+func set_player_name(player_id, new_name):
 	# 設定玩家名稱
-	print("設定玩家 ", player_id, " 的名稱為: ", name)
+	print("設定玩家 ", player_id, " 的名稱為: ", new_name)
 	print("舊名稱: ", player_names.get(player_id, "無"))
-	player_names[player_id] = name
+	player_names[player_id] = new_name
 	print("新名稱: ", player_names[player_id])
 
 func reset_state():

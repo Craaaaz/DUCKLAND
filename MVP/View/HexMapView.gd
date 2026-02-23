@@ -9,7 +9,7 @@ extends Node2D
 @onready var status_label = $CanvasLayer/Panel/StatusLabel
 
 # 本地暫存世界狀態的參照
-var local_world: Dictionary = {}
+var local_world: WorldState
 
 func _ready():
 	print("[MVP_HexMapView] 地圖 View 初始化...")
@@ -17,7 +17,7 @@ func _ready():
 	ready_btn.pressed.connect(_on_ready_pressed)
 
 # 接收 TurnManager 傳來的最新世界狀態 (包含地圖與單位)
-func update_view(world_state):
+func update_view(world_state: WorldState):
 	print("[MVP_HexMapView] 收到更新要求！重畫地圖...")
 	local_world = world_state
 	
