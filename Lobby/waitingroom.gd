@@ -184,19 +184,25 @@ func _update_player_count():
 
 func _on_start_button_pressed():
 	if network_manager.is_host and network_manager.get_player_count() >= 2:
-		print("開始遊戲...")
-		# ---------------------------------------------------------
-		# 【主遊戲呼叫位置 - 多人遊戲】
-		# 這裡應該實現開始遊戲的邏輯
-		# 例如：載入遊戲場景 (如 res://MainGame.tscn)、同步所有玩家等
-		# 您可以在此處加入 RPC 呼叫來通知所有客戶端載入場景
-		# ---------------------------------------------------------
+		print("開始遊戲... 通知所有人進入主控系統！")
 		
-		# 暫時顯示訊息
+		# 暫時顯示訊息並鎖定按鈕
 		status_label.text = "狀態: 正在開始遊戲..."
 		start_button.disabled = true
+		
+		# 【主遊戲呼叫位置 - 多人遊戲】
+		# 透過 RPC 廣播，通知房間內所有人（包含自己）切換至 MainController 場景
+		rpc("transition_to_main_game")
 	else:
 		print("無法開始遊戲：玩家數量不足或不是主機")
+
+@rpc("call_local", "reliable")
+func transition_to_main_game():
+	print("收到 RPC 廣播：切換至主控系統 (System/main_controller.tscn)")
+	var scene = preload("res://System/main_controller.tscn").instantiate()
+	get_tree().root.add_child(scene)
+	# 刪除等待大廳節點
+	queue_free()
 
 
 

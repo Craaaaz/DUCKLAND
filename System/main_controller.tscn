@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://main_controller"]
+
+[ext_resource type="Script" path="res://System/main_controller.gd" id="1"]
+[ext_resource type="Script" path="res://System/game_lobby.gd" id="2"]
+[ext_resource type="Script" path="res://System/game_site.gd" id="3"]
+[ext_resource type="Script" path="res://System/game_round.gd" id="4"]
+
+[node name="MainController" type="Node"]
+script = ExtResource("1")
+
+[node name="GameLobbySystem" type="Node" parent="."]
+script = ExtResource("2")
+
+[node name="GameSiteSystem" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="GameRoundSystem" type="Node" parent="."]
+script = ExtResource("4")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 1.0)
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -25.0
+offset_right = 150.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "主控系統 (MainController) 運行中...
+請查看終端機 (Output) 了解遊戲啟動流程。"
+horizontal_alignment = 1
+vertical_alignment = 1
