@@ -1,5 +1,21 @@
 # DUCKLAND - 專案待辦事項與未來規劃 (TODO List)
 
+## 🏗️ 系統架構設計 (5 層架構模型 - 企業級可擴充)
+本專案採用 **同步回合制 (WEGO / Simultaneous Turn-Based Strategy)** 與 **主機權威 (Server-Authoritative)** 網路模型。所有玩家在同一個回合內「同時」規劃行動，待所有人按下「結束回合」後，由伺服器統一結算並將結果同步回各客戶端。
+
+1. **① World Layer（世界層）**: `world_state.gd`，純數據層，記錄 Hex Grid 數據、地形、資源、單位位置，不依賴 UI。
+2. **② Player Layer（玩家層）**: `player_state.gd`，記錄玩家資源、科技、控制的單位清單。
+3. **③ Turn Manager（回合管理器）**: `turn_manager.gd`，管控有限狀態機 (規劃中 -> 結算中 -> 展演中)。
+4. **④ Action System（指令系統）**: `action_system.gd`，所有行為 (移動、建造、攻擊) 皆封裝為 Action，客戶端發送 Action，伺服器接收並驗證後統一執行。
+5. **⑤ Presentation Layer（視覺層）**: UI 與場景節點 (TileMapLayer, Sprite2D)，唯讀 `WorldState` 來渲染畫面，只能透過發送 Action 來改變遊戲狀態。
+
+## 🎯 MVP (最小可行性產品) 開發目標
+1. **生成 Hex 世界**: 主機產生純數據的 HexGrid 陣列，同步給客戶端並由 TileMapLayer 畫出。
+2. **產生兩個玩家**: 在地圖上生成 2 個玩家的單位 (純顏色方塊/基礎圖像)。
+3. **同步發送指令**: 雙方玩家自由規劃移動指令 (消耗行動點數 AP)，並將 Action 發送給主機。
+4. **結束回合與結算 (WEGO)**: 雙方按下「結束回合」，主機統一結算所有單位的移動與衝突。
+5. **結果同步**: 主機將結算結果與最新世界狀態同步給所有客戶端，客戶端播放移動/戰鬥動畫。
+
 ## 🎨 美術與資源規格 (Art & Assets)
 - **視覺風格決定**：本專案確定以 **2D 視角** 為主進行開發。
 - **支援的檔案格式**：
@@ -17,14 +33,9 @@
   - [ ] **2 人遊戲**：生成「長方形」的大致輪廓邊界。
   - [ ] **3~4 人遊戲**：生成「大六邊形」的大致輪廓邊界。
 - **實作細節**：
-  - 待實作 `System/game_site.gd`。
-  - 需要建立 Godot 4 的 TileMapLayer (或自訂 Hex Grid) 座標轉換系統。
-
-## 🔄 回合系統 (Game Round System)
-- [ ] 實作 4X 策略的 TBS (Turn-Based Strategy) 核心。
-- [ ] 依據網路連線清單，決定玩家的行動順序。
-- [ ] 實作「等待當前玩家完整行動後，再換下一位玩家」的狀態鎖定機制。
+  - 完善 `System/game_site.gd`，使其產出 `world_state` 數據。
+  - 建立 Godot 4 的 TileMapLayer 作為視覺層 (View)，讀取 `world_state` 繪製地圖。
 
 ## 🏛️ 大廳與初始設定 (Game Lobby System)
 - [ ] 實作遊戲大廳內的勢力/種族/特質選擇。
-- [ ] 將選擇的結果同步給所有連線玩家，再進入地圖生成階段。
+- [ ] 將選擇的結果同步給所有連線玩家，再進入地圖生成與回合階段。
