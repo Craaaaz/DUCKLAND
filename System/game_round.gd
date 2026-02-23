@@ -1,18 +1,35 @@
 extends Node
 
-# 這是 4X 遊戲回合制核心系統的空殼 (Placeholder)
-# 負責處理所有玩家依序完整行動 (Turn-Based Strategy) 的流程。
+# ==============================================================================
+# 這是 4X 遊戲回合制系統的「視覺/控制器包裝層」 (Presentation Layer Wrapper)
+# 負責: 作為 MainController 的接口，內部呼叫純邏輯層的 TurnManager。
+# ==============================================================================
 
 signal game_ended(winner_info)
 
+# 真正的核心邏輯層 (Data Layer)
+var turn_manager_core: TurnManager
+
+func _ready():
+	turn_manager_core = TurnManager.new()
+	# TurnManager 繼承 Node，必須加入場景樹中才能使用 RPC 和 Timer 等功能
+	add_child(turn_manager_core)
+
 func start_turns():
-	print("[GameRoundSystem] 4X 策略回合正式開始！")
-	# 這裡實作玩家的依序行動邏輯 (所有玩家完整行動後進入下一回合)。
-	# 例如: 回合開始 -> 資源結算 -> 玩家A行動 -> 玩家B行動 -> 結束回合。
+	print("[GameRoundSystem] 4X 策略回合 (WEGO 同步模式) 正式開始！")
 	
-	# 模擬第一回合開始
-	await get_tree().create_timer(1.0).timeout
-	print("[GameRoundSystem] 第 1 回合開始，等待玩家操作...")
-	
-	# 當某個勝利條件達成時，發射 game_ended 訊號
-	# game_ended.emit({"winner": "Player1"})
+	# 從 NetworkManager 抓取參與玩家 ID
+	var net_mgr = get_node_or_null("/root/NetworkManager")
+	if net_mgr and net_mgr.is_host:
+		var player_ids = net_mgr.multiplayer.get_peers()
+		player_ids.append(1) # 加入主機自己 (Host ID 永遠是 1)
+		
+		# 交由核心啟動第一回合
+		turn_manager_core.setup_players(player_ids)
+		print("[GameRoundSystem] 主機已通知 TurnManager 註冊所有玩家。雙方可同時操作。")
+	elif net_mgr == null:
+		print("[GameRoundSystem] 單機測試模式啟動 (無 NetworkManager)。")
+		turn_manager_core.setup_players([1, 2]) # 測試用
+
+func _on_game_ended(winner):
+	game_ended.emit({"winner": winner})
