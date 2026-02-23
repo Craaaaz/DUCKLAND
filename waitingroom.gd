@@ -11,9 +11,7 @@ var notification_timer = null
 func _ready():
 	# 使用自動載入的網路管理器
 	network_manager = get_node("/root/NetworkManager")
-	if not network_manager:
-		print("錯誤: 找不到自動載入的 NetworkManager")
-		return
+	
 		
 	print("=== 等待房間初始化 ===")
 	print("找到網路管理器，is_host = ", network_manager.is_host)
@@ -184,7 +182,7 @@ func _update_player_count():
 	if network_manager.is_host:
 		start_button.disabled = count < 2
 
-func _on_start_button_pressed():
+func _on_start_button_pressed():				#呼叫主程式
 	if network_manager.is_host and network_manager.get_player_count() >= 2:
 		print("開始遊戲...")
 		# 這裡應該實現開始遊戲的邏輯

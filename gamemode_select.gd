@@ -1,4 +1,4 @@
-extends Control
+extends Control				#模式選擇
 
 func _ready():
 	_create_buttons()

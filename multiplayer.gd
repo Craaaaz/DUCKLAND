@@ -1,4 +1,4 @@
-extends Control
+extends Control				#多人連線
 
 var network_manager
 var setup_btn: Button

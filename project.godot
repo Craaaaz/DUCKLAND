@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NetworkManager="*uid://clxjmtn4m1vlh"
+NetworkManager="*res://network_manager.gd"
 
 [physics]
 

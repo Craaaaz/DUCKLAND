@@ -1,4 +1,4 @@
-extends Control
+extends Control				#連線主畫面
 
 var player_name = ""
 var name_input = null
