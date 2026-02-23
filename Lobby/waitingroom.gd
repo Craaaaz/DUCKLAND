@@ -198,8 +198,8 @@ func _on_start_button_pressed():
 
 @rpc("call_local", "reliable")
 func transition_to_main_game():
-	print("收到 RPC 廣播：切換至主控系統 (System/main_controller.tscn)")
-	var scene = preload("res://System/main_controller.tscn").instantiate()
+	print("收到 RPC 廣播：切換至 MVP 主系統 (MVP/System/mvp_main.tscn)")
+	var scene = preload("res://MVP/System/mvp_main.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	# 刪除等待大廳節點
 	queue_free()
